@@ -3,6 +3,8 @@
 #define DOUT_PIN 2
 #define SCK_PIN 3
 
+HX711 scale;
+
 float knowWeight = 200;
 
 void setup(){
@@ -19,4 +21,9 @@ void setup(){
     scale.set_scale(knowWeight / weight1);
     scale.tare();
     Serial.println("Calibração do peso conhecido 1 concluída.");
+}
+
+void loop() {
+    float weight = scale.get_units();  // Lê o valor da célula de carga
+    Serial.println("Peso: " + String(weight) + " g");
 }
